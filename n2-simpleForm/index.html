@@ -8,6 +8,12 @@
 </head>
 
 <body>
+    <form id="registrationForm">
+        <input id="emailInput" type="email" name="email" placeholder="email" required>
+        <input id="passwordInput" type="password" name="password" placeholder="password" required>
+        <button type="submit">Register</button>
+    </form>
+
     <script>
         async function registerUser(email, password) {
             const body = {
@@ -32,7 +38,14 @@
             console.log(result);
         }
 
-        registerUser("joe@mail.com", "123456");
+        const registrationForm = document.querySelector("#registrationForm");
+        const emailInput = document.querySelector("#emailInput");
+        const passwordInput = document.querySelector("#passwordInput");
+
+        registrationForm.addEventListener("submit", function (event) {
+            event.preventDefault();
+            registerUser(emailInput.value, passwordInput.value);
+        });
     </script>
 </body>
 
