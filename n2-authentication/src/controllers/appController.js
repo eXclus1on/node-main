@@ -1,5 +1,8 @@
 function root(req, res) {
-    res.send("Internal server problems...");
+    res.json({
+        status: "OK",
+        message: "Hello"
+    });
 }
 
 module.exports = {
