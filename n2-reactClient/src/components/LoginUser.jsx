@@ -1,25 +1,25 @@
 import { useState } from "react";
 import authService from "../services/authService";
+import storageService from "../services/storageService";
 
-function RegisterUser() {
+function LoginUser() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   async function handleSubmit(event) {
     event.preventDefault();
 
-    const result = await authService.registerUser(email, password);
+    const result = await authService.loginUser(email, password);
 
-    if (result.status === "OK") {
-      alert("YAY");
-    } else {
-      alert("NBOOOOOO...");
+    if (result.token) {
+      storageService.setAuthToken(result.token);
+      console.log(result);
     }
   }
 
   return (
     <>
-      <h2>Register Form</h2>
+      <h2>Login Form</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
@@ -35,10 +35,10 @@ function RegisterUser() {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button>Register</button>
+        <button>Login</button>
       </form>
     </>
   );
 }
 
-export default RegisterUser;
+export default LoginUser;
