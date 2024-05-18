@@ -2,7 +2,11 @@ const movieDB = require("../db/movieDB");
 const baseDomain = process.env.BASE_DOMAIN;
 
 async function getMovies(req, res) {
-    const year = parseInt(req.query.year);
+    
+    let year = parseInt(req.query.year);
+    if (!year || isNaN(year)) {
+        year = 1981;
+    }
 
     const movies = await movieDB.getMovies(year);
     movies.forEach(function(movie) {
